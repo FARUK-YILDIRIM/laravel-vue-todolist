@@ -4,6 +4,7 @@
             <list-item
                 :item="item"
                 class="item"
+                v-on:itemchanged="$emit('reloadlist')"
             />
         </div>
     </div>
