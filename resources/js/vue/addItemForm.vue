@@ -3,6 +3,7 @@
         <input type="text" v-model="item.name"/>
         <font-awesome-icon
         icon="plus-square"
+        @click="addItem()"
         :class="[item.name  ? 'active' : 'inactive','plus']"
         />
     </div>
@@ -16,9 +17,25 @@ export default {
                 name: ""
             }
         }
+    },methods: {
+        addItem(){
+            if(this.item.name == ''){
+                return;
+            }
+            axios.post('api/item/store', {
+                item: this.item
+            })
+            .then( responce => {
+                if (responce.status == 201){
+                    this.item.name == "";
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        }
     }
 }
-
 </script>
 
 <style  scoped>
