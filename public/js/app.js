@@ -11928,7 +11928,9 @@ __webpack_require__.r(__webpack_exports__);
         item: this.item
       }).then(function (responce) {
         if (responce.status == 201) {
-          _this.item.name == "";
+          _this.item.name = "";
+
+          _this.$emit('reloadlist');
         }
       })["catch"](function (error) {
         console.log(error);
@@ -30527,7 +30529,13 @@ var render = function() {
         [
           _c("h2", { attrs: { id: "title" } }, [_vm._v("Todo List")]),
           _vm._v(" "),
-          _c("add-item-form")
+          _c("add-item-form", {
+            on: {
+              reloadlist: function($event) {
+                return _vm.getList()
+              }
+            }
+          })
         ],
         1
       ),
